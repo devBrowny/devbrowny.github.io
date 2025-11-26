@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>devBrowny | Sweet Development Space</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --browny-dark: #3e2723;
+        --browny-main: #5d4037;
+        --browny-medium: #795548;
+        --browny-light: #a1887f;
+        --browny-lighter: #bcaaa4;
+        --cream: #efebe9;
+        --white: #fafafa;
+        --accent: #ff6f00;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, var(--cream) 0%, var(--white) 100%);
+        color: var(--browny-dark);
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      header {
+        background: linear-gradient(
+          135deg,
+          var(--browny-dark) 0%,
+          var(--browny-main) 100%
+        );
+        color: var(--cream);
+        padding: 2rem 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .logo {
+        font-size: 2rem;
+        font-weight: bold;
+        color: var(--cream);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .logo span {
+        color: var(--accent);
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+      }
+
+      nav a {
+        color: var(--cream);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+      }
+
+      nav a:hover {
+        color: var(--accent);
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .hero {
+        text-align: center;
+        padding: 5rem 0;
+        animation: fadeIn 1s ease-in;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+        color: var(--browny-dark);
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+      }
+
+      .hero p {
+        font-size: 1.3rem;
+        color: var(--browny-medium);
+        margin-bottom: 2rem;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background: var(--browny-main);
+        color: var(--cream);
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: all 0.3s;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn:hover {
+        background: var(--accent);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      .section {
+        padding: 4rem 0;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        color: var(--browny-dark);
+        margin-bottom: 3rem;
+        position: relative;
+        padding-bottom: 1rem;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 4px;
+        background: var(--accent);
+        border-radius: 2px;
+      }
+
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .skill-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(93, 64, 55, 0.1);
+        transition: all 0.3s;
+        border: 2px solid var(--browny-lighter);
+      }
+
+      .skill-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(93, 64, 55, 0.2);
+        border-color: var(--accent);
+      }
+
+      .skill-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+
+      .skill-card h3 {
+        color: var(--browny-main);
+        margin-bottom: 0.5rem;
+        font-size: 1.5rem;
+      }
+
+      .skill-card p {
+        color: var(--browny-medium);
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .project-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(93, 64, 55, 0.1);
+        transition: all 0.3s;
+        border: 2px solid var(--browny-lighter);
+      }
+
+      .project-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 16px rgba(93, 64, 55, 0.2);
+      }
+
+      .project-image {
+        height: 200px;
+        background: linear-gradient(
+          135deg,
+          var(--browny-medium) 0%,
+          var(--browny-light) 100%
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+        color: var(--cream);
+      }
+
+      .project-content {
+        padding: 1.5rem;
+      }
+
+      .project-content h3 {
+        color: var(--browny-dark);
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+      }
+
+      .project-content p {
+        color: var(--browny-medium);
+        margin-bottom: 1rem;
+      }
+
+      .project-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .tag {
+        background: var(--browny-lighter);
+        color: var(--browny-dark);
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 500;
+      }
+
+      .contact {
+        background: linear-gradient(
+          135deg,
+          var(--browny-dark) 0%,
+          var(--browny-main) 100%
+        );
+        color: var(--cream);
+        text-align: center;
+        padding: 4rem 0;
+      }
+
+      .contact h2 {
+        color: var(--cream);
+        margin-bottom: 2rem;
+      }
+
+      .contact-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        flex-wrap: wrap;
+        margin-top: 2rem;
+      }
+
+      .contact-link {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--cream);
+        text-decoration: none;
+        font-size: 1.2rem;
+        padding: 1rem 2rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        transition: all 0.3s;
+      }
+
+      .contact-link:hover {
+        background: var(--accent);
+        transform: scale(1.05);
+      }
+
+      footer {
+        background: var(--browny-dark);
+        color: var(--browny-lighter);
+        text-align: center;
+        padding: 2rem 0;
+      }
+
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        nav ul {
+          gap: 1rem;
+        }
+
+        .header-content {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .skills-grid,
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .typing-effect {
+        border-right: 2px solid var(--accent);
+        animation: blink 0.7s infinite;
+      }
+
+      @keyframes blink {
+        0%,
+        100% {
+          border-color: transparent;
+        }
+        50% {
+          border-color: var(--accent);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">dev<span>Browny</span></div>
+          <nav>
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#services">Services</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <section id="home" class="hero">
+      <div class="container">
+        <h1>Welcome to <span class="typing-effect">devBrowny</span></h1>
+        <p>달콤한 디지털 경험을 만드는 개발 스튜디오 🍫</p>
+        <a href="#contact" class="btn">시작하기</a>
+      </div>
+    </section>
+
+    <section id="services" class="section">
+      <div class="container">
+        <h2 class="section-title">Services</h2>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <div class="skill-icon">🌐</div>
+            <h3>웹 개발</h3>
+            <p>현대적이고 반응형인<br />웹 애플리케이션 제작</p>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon">📱</div>
+            <h3>모바일 앱</h3>
+            <p>iOS/Android 크로스플랫폼<br />모바일 솔루션</p>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon">🎮</div>
+            <h3>게임 개발</h3>
+            <p>인터랙티브하고 재미있는<br />디지털 경험 구현</p>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon">⚡</div>
+            <h3>컨설팅</h3>
+            <p>기술 전략 수립 및<br />디지털 전환 지원</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container">
+        <h2 class="section-title">About devBrowny</h2>
+        <div class="projects-grid">
+          <div class="project-card">
+            <div class="project-image">🍫</div>
+            <div class="project-content">
+              <h3>우리의 철학</h3>
+              <p>
+                달콤한 브라우니처럼 사용자에게 즐거움을 주는 디지털 제품을
+                만듭니다. 단순함 속의 깊은 맛, 그것이 우리의 개발 철학입니다.
+              </p>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-image">💡</div>
+            <div class="project-content">
+              <h3>혁신적 솔루션</h3>
+              <p>
+                최신 기술과 창의적인 아이디어로 고객의 비즈니스 가치를
+                극대화합니다. 당신의 성공이 우리의 목표입니다.
+              </p>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-image">🤝</div>
+            <div class="project-content">
+              <h3>파트너십</h3>
+              <p>
+                단순한 개발 대행이 아닌, 함께 성장하는 파트너가 되고자 합니다.
+                지속 가능한 관계를 통해 더 큰 가치를 창출합니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="container">
+        <h2>프로젝트 문의</h2>
+        <p>여러분의 아이디어를 현실로 만들어드립니다</p>
+        <div class="contact-links">
+          <a href="mailto:contact@devbrowny.com" class="contact-link">
+            <span>✉️</span> 이메일 문의
+          </a>
+          <a href="tel:+82-10-0000-0000" class="contact-link">
+            <span>📞</span> 전화 상담
+          </a>
+          <a href="#" class="contact-link"> <span>💬</span> 카카오톡 상담 </a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <p>
+          &copy; 2025 devBrowny. All rights reserved. | 사업자등록번호:
+          000-00-00000
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Smooth scrolling
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Add active class to nav on scroll
+      window.addEventListener("scroll", () => {
+        let current = "";
+        const sections = document.querySelectorAll("section");
+
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop;
+          if (pageYOffset >= sectionTop - 100) {
+            current = section.getAttribute("id");
+          }
+        });
+
+        document.querySelectorAll("nav a").forEach((a) => {
+          a.classList.remove("active");
+          if (a.getAttribute("href") === `#${current}`) {
+            a.classList.add("active");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
